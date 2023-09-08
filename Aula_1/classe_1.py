@@ -60,4 +60,5 @@ class Triangulo:
     variavel p2 = Ponto
     variavel p3 = Ponto
 
+
 """
