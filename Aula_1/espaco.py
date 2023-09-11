@@ -1,3 +1,4 @@
+from math import sqrt
 #Ponto
 class Ponto:
     def __init__(self, x, y):
@@ -48,6 +49,17 @@ class Circulo():
     
     def coordenada(self):
         return [self.p.coordenada, self.raio]
+        
+    def esta_no_ciculo(self, local):
+        if len(local) > 2:
+            for ponto in local:
+                ponto_coordenadas = ponto.coordenada()
+                if sqrt((ponto_coordenadas[0] - self.p.coordenada()[0])**2 + (ponto_coordenadas[1] - self.p.coordenada()[1])**2) < self.raio:
+                    return True
+        else:
+            if sqrt((local[0] - self.p.coordenada()[0])**2 + (local[1] - self.p.coordenada()[1])**2) < self.raio:
+                    return True
+            return False
     
 # Reta
 class Reta():

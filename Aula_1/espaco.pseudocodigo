@@ -6,11 +6,12 @@ Classe Ponto:
         x = x
         y = y
     
-    Função coordenadaFormatada():
-        Retorna a string '{x}, {y}'
-    
     Função coordenada():
         Retorna uma lista [x, y]
+
+    Função mudar_coordenada(novoX, novoY):
+        x = x
+        y = y
 
 Classe Triangulo:
     Variável p1
@@ -22,11 +23,12 @@ Classe Triangulo:
         p2 = Ponto(p2[0], p2[1])
         p3 = Ponto(p3[0], p3[1])
     
-    Função coordenadaFormatada():
-        Retorna a string 'Ponto 1: ({p1.coordenadaFormatada()}) | Ponto 2: ({p2.coordenadaFormatada()}) | Ponto 3: ({p3.coordenadaFormatada()})'
-
     Função coordenada():
         Retorna uma lista [p1.coordenada(), p2.coordenada(), p3.coordenada()]
+
+    Função area():
+        Retorna area_triangulo
+    
 
 Classe Quadrado:
     Variável p1
@@ -40,11 +42,11 @@ Classe Quadrado:
         p3 = Ponto(p3[0], p3[1])
         p4 = Ponto(p4[0], p4[1])
     
-    Função coordenadaFormatada():
-        Retorna a string 'Ponto 1: ({p1.coordenadaFormatada()}) | Ponto 2: ({p2.coordenadaFormatada()}) | Ponto 3: ({p3.coordenadaFormatada()}) | Ponto 4: ({p4.coordenadaFormatada()})'
-    
     Função coordenada():
         Retorna uma lista [p1.coordenada(), p2.coordenada(), p3.coordenada(), p4.coordenada()]
+
+    Função area():
+        Retorna area_quadrado
 
 Classe Circulo:
     Variável p
@@ -54,11 +56,14 @@ Classe Circulo:
         p = Ponto(p[0], p[1])
         raio = raio
         
-    Função coordenadaFormatada():
-        Retorna a string 'Meio: ({p.coordenadaFormatada()}) | Raio: {raio}'
-    
     Função coordenada():
-        Retorna uma lista [p.coordenada(), raio]
+        Retorna uma lista p.coordenada()
+
+    Função esta_no_circulo(Objeto.coordenada):
+        Retorna boolean
+
+    Função area():
+        Retorna area_circulo
 
 Classe Reta:
     Variável p1
@@ -68,8 +73,8 @@ Classe Reta:
         p1 = Ponto(p1[0], p1[1])
         p2 = Ponto(p2[0], p2[1])
     
-    Função coordenadaFormatada():
-        Retorna a string 'Ponto 1: ({p1.coordenadaFormatada()}) | Ponto 2: ({p2.coordenadaFormatada()})'
-
     Função coordenada():
         Retorna uma lista [p1.coordenada(), p2.coordenada()]
+
+    Função tamanho():
+        Retorna tamanhoDaReta
