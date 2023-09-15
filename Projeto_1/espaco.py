@@ -15,13 +15,15 @@ class Ponto():
     def coordenada(self):
         return [self._x, self._y]
     
+    # Distancia da origem ate o ponto
     def origem(self):
-        return math.sqrt((self.coordenada()[0])**2 + (self.coordenada()[0])**2)
+        return math.sqrt((self._x)**2 + (self._y)**2)
     
     def mudar_ponto(self, novoX, novoY):
         self._x = novoX
         self._y = novoY
-       
+    
+    # Distancia entre dois pontos - ddp
     def ddp(self, p1, p2):
         return math.sqrt((p1.coordenada()[0]-p2.coordenada()[0])**2 + (p1.coordenada()[1]-p2.coordenada()[1])**2);
 
@@ -129,8 +131,9 @@ if __name__ == '__main__':
     print(q)
 
     print('Ponto:')
-    p = Ponto(10, 7)    
-    print(p)
+    p = Ponto(1, 1)   
+    print(p) 
+    print(p.origem())
 
     print('Circulo:')
     c = Circulo([1, 1], 3)

@@ -9,6 +9,7 @@ Classe Ponto:
     Função coordenada():
         Retorna uma lista [x, y]
 
+    # Distancia da origem ate o ponto
     Função origem():
         Retorna raiz_quadrada(x^2 + y^2)
 
@@ -16,6 +17,7 @@ Classe Ponto:
         x = novoX
         y = novoY
 
+    # Distancia entre dois pontos - ddp
     Função ddp(p1, p2):
         Retorna raiz_quadrada((p1.x - p2.x)^2 + (p1.y - p2.y)^2)
 
@@ -52,6 +54,8 @@ Classe Quadrado:
     Variável p4
 
     Função inicializar(p1, tamanho):
+        # p1 = canto inferior direito
+        # O quadrado expande para a direita e para cima do ponto p1 com lados tamanho 'tamanho'
         p1 = Ponto(p1[0], p1[1])
         p2 = Ponto(p1[0] + tamanho, p1[1])
         p3 = Ponto(p1[0], p1[1] + tamanho)
