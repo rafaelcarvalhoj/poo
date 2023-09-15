@@ -1,80 +1,106 @@
 Classe Ponto:
     Variável x
     Variável y
-    
+
     Função inicializar(x, y):
         x = x
         y = y
-    
+
     Função coordenada():
         Retorna uma lista [x, y]
 
-    Função mudar_coordenada(novoX, novoY):
+    Função origem():
+        Retorna raiz_quadrada(x^2 + y^2)
+
+    Função mudar_ponto(novoX, novoY):
         x = novoX
         y = novoY
+
+    Função ddp(p1, p2):
+        Retorna raiz_quadrada((p1.x - p2.x)^2 + (p1.y - p2.y)^2)
 
 Classe Triangulo:
     Variável p1
     Variável p2
     Variável p3
-    
+
     Função inicializar(p1, p2, p3):
         p1 = Ponto(p1[0], p1[1])
         p2 = Ponto(p2[0], p2[1])
         p3 = Ponto(p3[0], p3[1])
-    
+
+    Função lados():
+        Retorna [
+            ddp(p1, p2),
+            ddp(p1, p3),
+            ddp(p2, p3)
+        ]
+
     Função coordenada():
-        Retorna uma lista [p1.coordenada(), p2.coordenada(), p3.coordenada()]
+        Retorna [p1.coordenada(), p2.coordenada(), p3.coordenada()]
 
     Função area():
-        Retorna area_triangulo
-    
+        lados = lados()
+        p = (lados[0] + lados[1] + lados[2]) / 2
+        area = raiz_quadrada(p * (p - lados[0]) * (p - lados[1]) * (p - lados[2]))
+        Retorna area
 
 Classe Quadrado:
     Variável p1
     Variável p2
     Variável p3
     Variável p4
-    
-    Função inicializar(p1, p2, p3, p4):
+
+    Função inicializar(p1, tamanho):
         p1 = Ponto(p1[0], p1[1])
-        p2 = Ponto(p2[0], p2[1])
-        p3 = Ponto(p3[0], p3[1])
-        p4 = Ponto(p4[0], p4[1])
-    
+        p2 = Ponto(p1[0] + tamanho, p1[1])
+        p3 = Ponto(p1[0], p1[1] + tamanho)
+        p4 = Ponto(p1[0] + tamanho, p1[1] + tamanho)
+
     Função coordenada():
-        Retorna uma lista [p1.coordenada(), p2.coordenada(), p3.coordenada(), p4.coordenada()]
+        Retorna [p1.coordenada(), p2.coordenada(), p3.coordenada(), p4.coordenada()]
+
+    Função lados():
+        Retorna [ddp(p1, p2), ddp(p1, p3)]
 
     Função area():
-        Retorna area_quadrado
+        Retorna lados()[0] * lados()[1]
 
 Classe Circulo:
     Variável p
     Variável raio
-    
+
     Função inicializar(p, raio):
         p = Ponto(p[0], p[1])
         raio = raio
-        
-    Função coordenada():
-        Retorna uma lista p.coordenada()
 
-    Função esta_no_circulo(Objeto.coordenada):
-        Retorna boolean
+    Função coordenada():
+        Retorna [p.coordenada, raio]
+
+    Função esta_no_circulo(coordenada):
+        Se tamanho(coordenada) > 2:
+            Para cada ponto em coordenada:
+                Se raiz_quadrada((ponto[0] - p.x)^2 + (ponto[1] - p.y)^2) < raio:
+                    Retorna Verdadeiro
+            Retorna Falso
+        Senão:
+            Se raiz_quadrada((coordenada[0] - p.x)^2 + (coordenada[1] - p.y)^2) < raio:
+                Retorna Verdadeiro
+            Retorna Falso
 
     Função area():
-        Retorna area_circulo
+        Retorna pi * raio^2
 
 Classe Reta:
     Variável p1
     Variável p2
-    
+
     Função inicializar(p1, p2):
         p1 = Ponto(p1[0], p1[1])
         p2 = Ponto(p2[0], p2[1])
-    
+
     Função coordenada():
-        Retorna uma lista [p1.coordenada(), p2.coordenada()]
+        Retorna [p1.coordenada(), p2.coordenada()]
 
     Função tamanho():
-        Retorna tamanhoDaReta
+        Retorna ddp(p1, p2)
