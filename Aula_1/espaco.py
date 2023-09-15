@@ -23,7 +23,7 @@ class Ponto():
         self._y = novoY
        
     def ddp(self, p1, p2):
-        return math.sqrt((p1.coordenada()[0]-p2.coordenada()[0])**2 + (p1.coordenada()[0]-p2.coordenada()[1])**2);
+        return math.sqrt((p1.coordenada()[0]-p2.coordenada()[0])**2 + (p1.coordenada()[1]-p2.coordenada()[1])**2);
 
        
 #Triangulo
@@ -35,9 +35,9 @@ class Triangulo(Ponto):
     
     def lados(self):
         return [
-            super().ddp(self.p1, self.p2), 
-            super().ddp(self.p1, self.p3),
-            super().ddp(self.p2, self.p3)
+            self.ddp(self.p1, self.p2), 
+            self.ddp(self.p1, self.p3),
+            self.ddp(self.p2, self.p3)
         ]
     
     def __str__(self):
@@ -59,11 +59,12 @@ class Triangulo(Ponto):
 #Quadrado
 class Quadrado(Ponto):
     def __init__(self, p1, tamanho):
-        #p1 = canto inferior direito
+        # p1 = canto inferior direito
+        # O quadrado expande para a direita e para cima do ponto p1 com lados tamanho 'tamanho'
         self.p1 = Ponto(p1[0], p1[1])
-        self.p2 = Ponto(p2[0], p2[1])
-        self.p3 = Ponto(p3[0], p3[1])
-        self.p4 = Ponto(p4[0], p4[1])
+        self.p2 = Ponto(p1[0]+tamanho, p1[1])
+        self.p3 = Ponto(p1[0], p1[1]+tamanho)
+        self.p4 = Ponto(p1[0]+tamanho, p1[1]+tamanho)
         
     def __str__(self):
         return f'Ponto 1: ({self.p1.getP()()}) | Ponto 2: ({self.p2.getP()()}) | Ponto 3: ({self.p3.getP()()} | Ponto 4: ({self.p4.getP()()})'
@@ -87,17 +88,18 @@ class Circulo(Ponto):
         self.raio = raio
         
     def __str__(self):
-        return f'Meio: ({self.p.getP()}) | Raio: {self.raio}'
+        return f'Meio: ({self.p.getP()()}) | Raio: {self.raio}'
     
     def coordenada(self):
         return [self.p.coordenada, self.raio]
         
-    def ponto_esta_no_ciculo(self, local):
+    # Ponto esta no circulo
+    def pec(self, local):
         if len(local) > 2:
             for ponto in local:
-                ponto_coordenadas = ponto.coordenada()
-                if math.sqrt((ponto_coordenadas[0] - self.p.coordenada()[0])**2 + (ponto_coordenadas[1] - self.p.coordenada()[1])**2) < self.raio:
+                if math.sqrt((ponto[0] - self.p.coordenada()[0])**2 + (ponto[1] - self.p.coordenada()[1])**2) < self.raio:
                     return True
+                return False
         else:
             if math.sqrt((local[0] - self.p.coordenada()[0])**2 + (local[1] - self.p.coordenada()[1])**2) < self.raio:
                     return True
@@ -112,14 +114,39 @@ class Reta(Ponto):
         self.p2 = Ponto(p2[0], p2[1])
     
     def __str__(self):
-        return f'Ponto 1: ({self.p1.getP()}) | Ponto 2: ({self.p2.getP()})'
+        return f'Ponto 1: ({self.p1.getP()()}) | Ponto 2: ({self.p2.getP()()})'
 
     def coordenada(self):
-        return [self.p1.coordenada, self.p2.coordenada]
+        return [self.p1.coordenada(), self.p2.coordenada()]
     
     def tamanho(self):
-        return self.ddp(self.p1, self.p2);
+        return self.ddp(self.p1, self.p2)
 
 if __name__ == '__main__':
-    p1 = Quadrado([0,0], [2,7], [9,4], [1,1])
-    print(p1.area())
+
+    print('Quadrado:')
+    q = Quadrado([7,9], 8)
+    print(q)
+
+    print('Ponto:')
+    p = Ponto(10, 7)    
+    print(p)
+
+    print('Circulo:')
+    c = Circulo([1, 1], 3)
+    print(c)
+    print(c.pec(q.coordenada()))
+
+    print('Triangulo: ')
+    t = Triangulo([15, 15], [18, 12], [20, 35])
+    print(t)
+    print(t.area())
+    print(t.lados())
+
+    print('Reta: ')
+    r = Reta([-4, 0], [-2, -20])
+    print(r)
+    print(r.tamanho())
+    r.p2.mudar_ponto(-2, 0)
+    print(r.coordenada())
+    print(r.tamanho())
