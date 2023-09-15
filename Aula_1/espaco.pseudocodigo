@@ -10,8 +10,8 @@ Classe Ponto:
         Retorna uma lista [x, y]
 
     Função mudar_coordenada(novoX, novoY):
-        x = x
-        y = y
+        x = novoX
+        y = novoY
 
 Classe Triangulo:
     Variável p1

@@ -16,14 +16,14 @@ class Ponto():
         return [self._x, self._y]
     
     def origem(self):
-        return math.sqrt(self._x**2 + self._y**2);
+        return math.sqrt((self.coordenada()[0])**2 + (self.coordenada()[0])**2)
     
     def mudar_ponto(self, novoX, novoY):
         self._x = novoX
         self._y = novoY
        
     def ddp(self, p1, p2):
-        return math.sqrt((p1.coordenada[0]-p2.coordenada[0])**2 + (p1.coordenada[0]-p2.coordenada[1])**2);
+        return math.sqrt((p1.coordenada()[0]-p2.coordenada()[0])**2 + (p1.coordenada()[0]-p2.coordenada()[1])**2);
 
        
 #Triangulo
@@ -34,17 +34,19 @@ class Triangulo(Ponto):
         self.p3 = Ponto(p3[0], p3[1])
     
     def lados(self):
-        return [self.ddp(self.p1, self.p2), 
-                self.ddp(self.p2, self.p3), 
-                self.ddp(self.p1, self.p3)]
+        return [
+            super().ddp(self.p1, self.p2), 
+            super().ddp(self.p1, self.p3),
+            super().ddp(self.p2, self.p3)
+        ]
     
     def __str__(self):
-        return f'Ponto 1: ({self.p1.getP()}) | Ponto 2: ({self.p2.getP()}) | Ponto 3: ({self.p3.getP()})'
+        return f'Ponto 1: ({self.p1.getP()()}) | Ponto 2: ({self.p2.getP()()}) | Ponto 3: ({self.p3.getP()()})'
 
     def coordenada(self):
-        return [self.p1.coordenada, 
-                self.p2.coordenada, 
-                self.p3.coordenada]
+        return [self.p1.coordenada(), 
+                self.p2.coordenada(), 
+                self.p3.coordenada()]
 
     # Heron
     def area(self):
@@ -56,22 +58,21 @@ class Triangulo(Ponto):
 
 #Quadrado
 class Quadrado(Ponto):
-    def __init__(self, p1, p2, p3, p4):
-        #p1 e p2 = base
-        #p1 e p3 = altura
+    def __init__(self, p1, tamanho):
+        #p1 = canto inferior direito
         self.p1 = Ponto(p1[0], p1[1])
         self.p2 = Ponto(p2[0], p2[1])
         self.p3 = Ponto(p3[0], p3[1])
         self.p4 = Ponto(p4[0], p4[1])
         
     def __str__(self):
-        return f'Ponto 1: ({self.p1.getP()}) | Ponto 2: ({self.p2.getP()}) | Ponto 3: ({self.p3.getP()} | Ponto 4: ({self.p4.getP()})'
+        return f'Ponto 1: ({self.p1.getP()()}) | Ponto 2: ({self.p2.getP()()}) | Ponto 3: ({self.p3.getP()()} | Ponto 4: ({self.p4.getP()()})'
     
     def coordenada(self):
-        return [self.p1.coordenada, 
-                self.p2.coordenada,
-                self.p3.coordenada, 
-                self.p4.coordenada]
+        return [self.p1.coordenada(), 
+                self.p2.coordenada(),
+                self.p3.coordenada(), 
+                self.p4.coordenada()]
     
     def lados(self):
         return [self.ddp(self.p1, self.p2), self.ddp(self.p1, self.p3)]
@@ -120,3 +121,5 @@ class Reta(Ponto):
         return self.ddp(self.p1, self.p2);
 
 if __name__ == '__main__':
+    p1 = Quadrado([0,0], [2,7], [9,4], [1,1])
+    print(p1.area())
