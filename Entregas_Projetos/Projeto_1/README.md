@@ -14,4 +14,4 @@ Tanto no Pseudo-Código quanto no arquivo em Python o projeto possui as seguinte
 - Circulo
 - Reta
 
-Para os métodos das classes foram desenvolvidas funções simples como calcular a área ou a distância entre dois pontos
+Para os métodos das classes foram desenvolvidas funções simples como calcular a área, distância entre dois pontos, distância de um ponto até a origem e etc.
