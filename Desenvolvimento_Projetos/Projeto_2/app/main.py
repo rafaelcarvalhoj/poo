@@ -7,11 +7,20 @@ app =  FastAPI()
 
 space = CartesianBoard()
 
+# Start some shapes
+p1 = Ponto(102, 78)
+p2 = Ponto(90, 66)
+t = Triangulo([26, 0],[53, 53], [26, 10])
+c = Circulo([0,0], 150)
+space.addShape(p1)
+space.addShape(p2)
+space.addShape(t)
+space.addShape(c)
+
+
 @app.get('/')
 def root():
-    return {'Projeto 2' : 'Quadro Cartesiano'}
-
-# CRUD
+    return {'Projeto 2' : 'API Quadro Cartesiano'}
 
 # CREATE
 @app.post('/shapes/add/{shape_type}')
@@ -53,5 +62,9 @@ async def get_all():
 # UPDATE
 
 # DELETE
-
-
+@app.delete('/shapes/del/{shape_key}')
+async def del_shape(shape_key : str):
+    space.delShape(shape_key)
+    if not (shape_key in space.getShapes()):
+        return {"Shape removido"}
+    return {"Erro ao remover o shape"}
