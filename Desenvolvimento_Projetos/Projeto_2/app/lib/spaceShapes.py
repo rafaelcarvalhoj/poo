@@ -37,13 +37,14 @@ class Ponto():
     def origem(self) -> float:
         return math.sqrt((self._x)**2 + (self._y)**2)
     
-    def mudar_ponto(self, novoX, novoY) -> None:
+    def update(self, novoX, novoY) -> None:
         self._x = novoX
         self._y = novoY
     
     # Distancia entre dois pontos - ddp
     def ddp(self, p1, p2) -> float:
         return math.sqrt((p1.coordenada()[0]-p2.coordenada()[0])**2 + (p1.coordenada()[1]-p2.coordenada()[1])**2);
+    
 
        
 #Triangulo
@@ -84,6 +85,11 @@ class Triangulo(Ponto):
         p = (lado[0]+lado[1]+lado[2])/2
         area = math.sqrt(p*(p-lado[0])*(p-lado[1])*(p-lado[2]))
         return area
+    
+    def update(self, newP1, newP2, newP3):
+        self.p1.update(newP1[0], newP1[1])
+        self.p2.update(newP2[0], newP2[1])
+        self.p3.update(newP3[0], newP3[1])
         
 
 #Quadrado
@@ -120,6 +126,13 @@ class Quadrado(Ponto):
     
     def area(self):
         return self.lados()[0]*self.lados()[1]
+    
+    def update(self, newP1, newSize):
+        self.p1.update(newP1[0], newP1[1])
+        self.p2.update(newP1[0]+newSize, newP1[1])
+        self.p3.update(newP1[0], newP1[1]+newSize)
+        self.p4.update(newP1[0]+newSize, newP1[1]+newSize)
+        
 
 #Circulo
 class Circulo(Ponto):
@@ -157,6 +170,11 @@ class Circulo(Ponto):
     
     def area(self):
         return (math.pi**2)*self.raio
+    
+    def update(self, newP, newRaio):
+        self.p.update(newP[0], newP[1])
+        self.raio = newRaio
+
 # Reta
 class Reta(Ponto):
     def __init__(self, p1, p2):
@@ -181,3 +199,7 @@ class Reta(Ponto):
     
     def tamanho(self):
         return self.ddp(self.p1, self.p2)
+    
+    def update(self, newP1, newP2):
+        self.p1.update(newP1[0], newP1[1])
+        self.p2.update(newP2[0], newP2[1])
