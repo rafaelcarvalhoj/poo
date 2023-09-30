@@ -37,9 +37,9 @@ class Ponto():
     def origem(self) -> float:
         return math.sqrt((self._x)**2 + (self._y)**2)
     
-    def update(self, novoX, novoY) -> None:
-        self._x = novoX
-        self._y = novoY
+    def update(self, **kwargs):
+        self._x = kwargs["x"]
+        self._y = kwargs["y"]
     
     # Distancia entre dois pontos - ddp
     def ddp(self, p1, p2) -> float:
@@ -86,10 +86,10 @@ class Triangulo(Ponto):
         area = math.sqrt(p*(p-lado[0])*(p-lado[1])*(p-lado[2]))
         return area
     
-    def update(self, newP1, newP2, newP3):
-        self.p1.update(newP1[0], newP1[1])
-        self.p2.update(newP2[0], newP2[1])
-        self.p3.update(newP3[0], newP3[1])
+    def update(self, **kwargs):
+        self.p1.update(x=kwargs["p1"][0], y=kwargs["p1"][1])
+        self.p2.update(x=kwargs["p2"][0], y=kwargs["p2"][1])
+        self.p3.update(x=kwargs["p3"][0], y=kwargs["p3"][1])
         
 
 #Quadrado
@@ -127,11 +127,19 @@ class Quadrado(Ponto):
     def area(self):
         return self.lados()[0]*self.lados()[1]
     
-    def update(self, newP1, newSize):
-        self.p1.update(newP1[0], newP1[1])
-        self.p2.update(newP1[0]+newSize, newP1[1])
-        self.p3.update(newP1[0], newP1[1]+newSize)
-        self.p4.update(newP1[0]+newSize, newP1[1]+newSize)
+    def update(self, **kwargs):
+        self.p1.update(x=kwargs["p"][0],                   
+                       y=kwargs["p"][1]
+        )
+        self.p2.update(x=kwargs["p"][0]+kwargs["tamanho"], 
+                       y=kwargs["p"][1]
+        )
+        self.p3.update(x=kwargs["p"][0],                   
+                       y=kwargs["p"][1]+kwargs["tamanho"]
+        )
+        self.p4.update(x=kwargs["p"][0]+kwargs["tamanho"], 
+                       y=kwargs["p"][1]+kwargs["tamanho"]
+        )
         
 
 #Circulo
@@ -171,9 +179,9 @@ class Circulo(Ponto):
     def area(self):
         return (math.pi**2)*self.raio
     
-    def update(self, newP, newRaio):
-        self.p.update(newP[0], newP[1])
-        self.raio = newRaio
+    def update(self, **kwargs):
+        self.p.update(x=kwargs["p"][0], y=kwargs["p"][1])
+        self.raio = kwargs["raio"]
 
 # Reta
 class Reta(Ponto):
@@ -200,6 +208,6 @@ class Reta(Ponto):
     def tamanho(self):
         return self.ddp(self.p1, self.p2)
     
-    def update(self, newP1, newP2):
-        self.p1.update(newP1[0], newP1[1])
-        self.p2.update(newP2[0], newP2[1])
+    def update(self, **kwargs):
+        self.p1.update(x=kwargs["p1"][0], y=kwargs["p1"][1])
+        self.p2.update(x=kwargs["p2"][0], y=kwargs["p2"][1])

@@ -59,7 +59,11 @@ async def add_shape(shape_type : str, shape_data: Dict):
 @app.get('/shapes/')
 async def get_all():
     return space.getShapes()
+
 # UPDATE
+@app.post('/shapes/update/{shape_key}')
+async def update_shape(shape_key, shape_data: Dict):
+    space.updateShape(shape_data)
 
 # DELETE
 @app.delete('/shapes/del/{shape_key}')
