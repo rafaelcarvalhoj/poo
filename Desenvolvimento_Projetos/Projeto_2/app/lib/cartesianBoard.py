@@ -5,10 +5,13 @@ class CartesianBoard():
         self.shapes = {}
 
     def addShape(self, newShape) -> None:
-        self.shapes[newShape.getKey()] = {"type" : newShape.getType(), "cord" : newShape.getPosition()}
+        if newShape.getType() != 'Circulo':
+            self.shapes[newShape.getKey()] = {"type" : newShape.getType(), "cord" : newShape.getPosition()}
+        else:
+            self.shapes[newShape.getKey()] = {"type" : newShape.getType(), "cord" : newShape.getPosition(), "raio": newShape.raio}
 
-    def delShape(self, shape) -> None:
-        self.shapes.pop(shape.getKey())
+    def delShape(self, shape_key : str) -> None:
+        self.shapes.pop(shape_key)
 
     def getShape(self, shape) -> str:
         return {shape.getKey() : {"type" : shape.getType(), "cord" : shape.getPosition()}}
@@ -20,4 +23,4 @@ class CartesianBoard():
             print(f'{key} : {value}')
 
     def getShapes(self):
-        return {{key: value} for key, value in self.shapes.items()}
+        return [{key: value} for key, value in self.shapes.items()]
