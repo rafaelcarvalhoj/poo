@@ -7,17 +7,6 @@ app =  FastAPI()
 
 space = CartesianBoard()
 
-# Start some shapes
-p1 = Ponto(102, 78)
-p2 = Ponto(90, 66)
-t = Triangulo([26, 0],[53, 53], [26, 10])
-c = Circulo([0,0], 150)
-space.addShape(p1)
-space.addShape(p2)
-space.addShape(t)
-space.addShape(c)
-
-
 @app.get('/')
 def root():
     return {'Projeto 2' : 'API Quadro Cartesiano'}
@@ -61,9 +50,11 @@ async def get_all():
     return space.getShapes()
 
 # UPDATE
-@app.post('/shapes/update/{shape_key}')
-async def update_shape(shape_key, shape_data: Dict):
-    space.updateShape(shape_data)
+@app.put('/shapes/update/{shape_key}')
+async def update_shape(shape_key: str, shape_config : Dict):
+    space.updateShape(shape_key, shape_config)
+    return {f"Shape {shape_key} alterado com sucesso"} 
+
 
 # DELETE
 @app.delete('/shapes/del/{shape_key}')

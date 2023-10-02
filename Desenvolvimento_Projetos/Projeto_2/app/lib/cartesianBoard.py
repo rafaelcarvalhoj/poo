@@ -25,10 +25,8 @@ class CartesianBoard():
     def getShapes(self):
         return [{key: value} for key, value in self.shapes.items()]
     
-    def updateShape(self, shape_key, **kwargs):
-        shapes = self.getShapes()
-        for key, value in kwargs.items():
-            if key in shapes[shape_key]:
-                shapes[shape_key] = value
+    def updateShape(self, shape_key, shape_config):
+        return self.shapes[shape_key].update(shape_config)
+
             
             
